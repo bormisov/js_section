@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            var XO = 'X';
+            var name1 = 'Игрок 1';
+            var name2 = 'Игрок 2';
+            var sign1 = 'X';
+            var sign2 = 'O';
+            function CheckWin(PlayerNum){
+                if (PlayerNum == 1){
+                    var sign = sign1;
+                    var name = name1;
+                } else {
+                    var sign = sign2;
+                    var name = name2;
+                }
+                if ((document.getElementById('button1').innerHTML == sign) &&
+                    (document.getElementById('button2').innerHTML == sign) &&
+                    (document.getElementById('button3').innerHTML == sign)                
+                ) {                    
+                    alert(name + ' победил!');
+                }
+            }
+            function setPlayerName(){
+                if (XO == sign1){
+                    document.getElementById('label').innerHTML = 'Ходит ' + name1;
+                } else {
+                    document.getElementById('label').innerHTML = 'Ходит ' + name2;
+                 }
+            }
+
+
+            function setX(button){
+                document.getElementById(button).innerHTML = XO;
+                if (XO == sign1){
+                    XO = sign2;
+                    CheckWin(1);                    
+                } else {
+                    XO = sign1;
+                    CheckWin(2);
+                }
+                setPlayerName();
+                
+            }
+            function askName1(PlayerNum,XO){
+                var name = prompt("Введите имя игрока"+ PlayerNum);
+                document.getElementById("player"+PlayerNum).innerHTML = name + ' играет '+XO;
+                if (PlayerNum == 1){name1 = name}
+                else { name2 = name}
+                setPlayerName();    
+            }
+        </script>
+        <style>
+            .square {
+                border: 1px solid #999; 
+                height: 34px; 
+                width: 34px; 
+                background: #fff;
+            }
+            #cancel{
+                border: 1px solid #999; 
+                height: 34px; 
+                width: 200px; 
+                background: #fff;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 id = "label">Ходит ...</h1>
+        <div id = "player1">Игрок 1 играет Х </div>
+            <button onclick="askName1('1','X')" >Изменить имя</button>
+        <div id = "player2">Игрок 2 играет О </div>
+            <button onclick="askName1('2','O')">Изменить имя</button>
+        
+        <div align="center">
+            <button class="square" id="button1" onclick="setX('button1')" ></button>
+            <button class="square" id="button2" onclick="setX('button2')" ></button>
+            <button class="square" id="button3" onclick="setX('button3')"></button>
+        </div>
+        <div align="center">
+            <button class="square" id="button4" onclick="setX('button4')"></button>
+            <button class="square" id="button5" onclick="setX('button5')"></button>
+            <button class="square" id="button6" onclick="setX('button6')"></button>
+        </div>
+        <div align="center">
+            <button class="square" id="button7" onclick="setX('button7')"></button>
+            <button class="square" id="button8" onclick="setX('button8')"></button>
+            <button class="square" id="button9" onclick="setX('button9')"></button>
+        </div>
+        <div align="center">
+            <button id="cancel" >Отменить ход</button>
+        </div>
+    </body>
+</html>

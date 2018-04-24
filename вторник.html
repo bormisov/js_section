@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+ <html>
+     <head>
+         <script>
+            var signs = ['','X','O'];
+            var turn = 1;
+            var names = ["","Игрок 1", "Игрок 2"]
+            var game = [0,    0,0,0, 0,0,0, 0,0,0]
+
+            function drawGame(){
+                document.getElementById('button1').innerHTML = signs[game[1]];
+                document.getElementById('button2').innerHTML = signs[game[2]];
+                document.getElementById('button3').innerHTML = signs[game[3]];
+                document.getElementById('button4').innerHTML = signs[game[4]];
+                document.getElementById('button5').innerHTML = signs[game[5]];
+                document.getElementById('button6').innerHTML = signs[game[6]];
+                document.getElementById('button7').innerHTML = signs[game[7]];
+                document.getElementById('button8').innerHTML = signs[game[8]];
+                document.getElementById('button9').innerHTML = signs[game[9]];
+            }   
+
+            function setPlayerName(){
+                document.getElementById('label').innerHTML = 'Ходит ' + names[turn];
+                document.getElementById("pleer1").innerHTML = names[1] + " играет " + signs[1];
+                document.getElementById("pleer2").innerHTML = names[2] + " играет " + signs[2];
+            }
+
+            function CheckWin(PlayerNum){
+                if (game[1] == PlayerNum && game[2] == PlayerNum && game[3] == PlayerNum)    
+                    alert(names[PlayerNum] + 'победил!')       
+            }   
+
+            function askPleerName(pleerNum) {
+                var name = prompt("Введи имя игрока " + pleerNum);
+                names[+pleerNum] = name;
+                setPlayerName();
+            }
+
+            function askSign(pleerNum){
+                var sign = prompt("Введите букву");
+                signs[+pleerNum] = sign;
+                setPlayerName();
+            }
+
+            function setX(cell){
+                if (game[cell] == 0){
+                    game[cell] = turn;
+                    CheckWin(turn);
+                    turn = 3 - turn;//1->2, 2->1
+                    drawGame();
+                    setPlayerName();
+                }                     
+            }
+
+         </script>
+         <style>
+            #cansel {
+                background: #fff;
+             }
+             .square {
+                height: 34px; 
+                width: 34px; 
+                background: #fff;
+                border: 1px solid #999;
+                line-height: 34px;
+                margin-top: 1px;
+             }
+         </style>
+     </head>
+     <body>
+         <h1 id = "label">Ходит ...</h1>
+         <div id="pleer1">
+            Игрок 1 играет Х
+         </div>
+         <button onclick='askPleerName("1","X")'>
+            Изменить имя
+         </button>
+         <button onclick="askSign('1')">
+            Изменить букву
+         </button>        
+         <div id="pleer2">
+                Игрок 2 играет О
+         </div>
+         <button onclick='askPleerName("2","O")'>
+            Изменить имя
+         </button>
+         <button onclick="askSign('2')">
+            Изменить букву
+         </button>         
+         </div>
+         <div align="center">
+            <button id="button1" onclick="setX(1)" class="square"></button>
+            <button id="button2" onclick="setX(2)" class="square"></button>
+            <button id="button3" onclick="setX(3)" class="square"></button>
+         </div>
+         <div align="center">
+            <button id="button4" onclick="setX(4)" class="square"></button>
+            <button id="button5" onclick="setX(5)" class="square"></button>
+            <button id="button6" onclick="setX(6)" class="square"></button>
+         </div>
+         <div align="center">
+            <button id="button7" onclick="setX(7)" class="square"></button>
+            <button id="button8" onclick="setX(8)" class="square"></button>
+            <button id="button9" onclick="setX(9)" class="square"></button>
+         </div>
+         <div align="center">
+            <button id="cansel" onclick='myFunction3("Hello JS!!!")'>Отменить ход</button>
+         </div>
+     </body>
+ </html>
